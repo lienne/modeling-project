@@ -5,22 +5,16 @@
 \author{Tyler Lukasiewicz, Liana Severo, Caitlin Buttery}
 \begin{document}
 \maketitle
-\section{The Simple Population Dynamcis Model}
+\section{The Simple Population Dynamics Model}
 \begin{equation}
     \begin{split}
         \dot v &= v(r-ax) = f_1(v,x), \\
         \dot x &= -bx + cv = f_2(v,x)
     \end{split}
 \end{equation}
-With fixed points 
-\begin{equation}
-    \begin{split}
-        &\dot v(0,0) =  \dot x(0,0) = 0 \\
-        &\dot v(\frac{ba}{rc} ,\frac{a}{r} ) = \dot x(\frac{ba}{rc} ,\frac{a}{r} ) = 0
-    \end{split}
-\end{equation}
+
 Where $v$ is the viral strain and $x$ is the specific immune response to the strain. $r$ is the rate at which the virus reproduces. $a$ is the rate at which the immune cells destroy the virus. $b$ is the rate at which the immune cells die off. $c$ is rate at which the immune cells reproduce. This is dependent on the number of viruses present, $v$.  
-\subsection{Getting the fixed points}
+\subsection{Getting our eigenvalues}
 First we take the Jacobian
 \begin{equation}
     J =
@@ -29,19 +23,27 @@ First we take the Jacobian
         c       & -b
     \end{pmatrix}
 \end{equation}
-Then we find the characteristic equation. Let $\alpha = \frac{ba}{rc} $ and let $\beta = \frac{a}{r} $
+Then we find the characteristic equations by evaluating the Jacobian at the two fixed points of our system $(0,0)$ and $(\alpha,\beta)$, where $\alpha = \frac{br}{ac} $ and let $\beta = \frac{r}{a} $
 \begin{equation}
     \begin{split}
         &J|_{(0,0)} - \lambda I = \lambda^2 + \lambda(b-r) -br = 0\\
-        &\implies \lambda_{1,2} = r, -b \\
+        &\implies \lambda_{1,2} = r,-b\\
         &J|_{(\alpha,\beta)}  - \lambda I =  \lambda^2 + \lambda \gamma + \delta\\ 
+        &\implies \lambda_{1,2} = \frac{-\gamma \pm \sqrt{\gamma^2 - 4\delta}}{2} \\
         \text{where} \\
-        &\gamma =  a\beta-r+b \text{, and } \delta =ba\beta -br-a\alpha c \\
-        &\implies \lambda_{1,2} = \frac{-\gamma \pm \sqrt{\gamma^2 - 4\delta}}{2} 
+        &\gamma =  b - r + a\beta \text{, and } \delta = ac\alpha + ab\beta -rb
     \end{split}
 \end{equation}
-    \begin{figure}[h!]
-        \caption{Population size of the viral load and the immune response for a sin- gle virus strain with $r = 2.4, a = 2, b = 0.1, c = 1.$}
-        \includegraphics[scale=.4]{imgs/hiv_graph1.png}
-    \end{figure}
+\subsection{modeling our sytem}
+We will now model our system of equations with conditions $r = 2.4, a = 2, b = 0.1, \text{ and }c = 1.$. We will also assume that we are starting with no viruses and no immune response.
+\label{sub:modeling our sytem}
+
+\subsubsection{Determining Stability of Fixed points}
+The fixed point $(0,0)$ coresponds to the eigenvalues $\lambda_1 = 2.4, \lambda_2 = -.1$, which implies that $(0,0)$ is a saddle point. The fixed point $(\alpha,\beta) = (.12,1.2)$ results in eigenvalues $\lambda_1 = -.05 + 4.873i , \lambda_2 = -.05 - 4873i$, which implies that the point $(.12,1.2)$ is a spiral sink.
+\label{sub:Determining Stability of Fixed points}
+
+\begin{figure}[h!]
+    \caption{Population size of the viral load and the immune response for a sin- gle virus strain with $r = 2.4, a = 2, b = 0.1, c = 1.$}
+    \includegraphics[scale=.4]{imgs/hiv_graph1.png}
+\end{figure}
 \end{document}

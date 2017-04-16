@@ -1,10 +1,11 @@
 \documentclass{article}
+\usepackage{graphicx}
 \usepackage{amsmath}
 \title{Mathematical Modeling Project}
 \author{Tyler Lukasiewicz, Liana Severo, Caitlin Buttery}
 \begin{document}
 \maketitle
-\section{the belle sux model}
+\section{The Simple Population Dynamcis Model}
 \begin{equation}
     \begin{split}
         \dot v &= v(r-ax) = f_1(v,x), \\
@@ -39,4 +40,8 @@ Then we find the characteristic equation. Let $\alpha = \frac{ba}{rc} $ and let 
         &\implies \lambda_{1,2} = \frac{-\gamma \pm \sqrt{\gamma^2 - 4\delta}}{2} 
     \end{split}
 \end{equation}
+    \begin{figure}[h!]
+        \caption{Population size of the viral load and the immune response for a sin- gle virus strain with $r = 2.4, a = 2, b = 0.1, c = 1.$}
+        \includegraphics[scale=.4]{imgs/hiv_graph1.png}
+    \end{figure}
 \end{document}

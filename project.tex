@@ -34,16 +34,26 @@ Then we find the characteristic equations by evaluating the Jacobian at the two 
         &\gamma =  b - r + a\beta \text{, and } \delta = ac\alpha + ab\beta -rb
     \end{split}
 \end{equation}
-\subsection{modeling our sytem}
+\subsection{modeling our system with one viral strain}
 We will now model our system of equations with conditions $r = 2.4, a = 2, b = 0.1, \text{ and }c = 1.$. We will also assume that we are starting with no viruses and no immune response.
 \label{sub:modeling our sytem}
 
-\subsubsection{Determining Stability of Fixed points}
-The fixed point $(0,0)$ coresponds to the eigenvalues $\lambda_1 = 2.4, \lambda_2 = -.1$, which implies that $(0,0)$ is a saddle point. The fixed point $(\alpha,\beta) = (.12,1.2)$ results in eigenvalues $\lambda_1 = -.05 + 4.873i , \lambda_2 = -.05 - 4873i$, which implies that the point $(.12,1.2)$ is a spiral sink.
+The fixed point $(0,0)$ coresponds to the eigenvalues $\lambda_1 = 2.4, \lambda_2 = -.1$, which implies that $(0,0)$ is a saddle point. The fixed point $(\alpha,\beta) = (.12,1.2)$ results in eigenvalues $\lambda_1 = -.05 + 4.873i , \lambda_2 = -.05 - 4873i$, which implies that the point $(.12,1.2)$ is a spiral sink. So in this system both the viral strain and immune response will begin oscillating dramatically and then as time approaches infinity, they will settle to stable values. This is illustrated in figure \ref{fig:hiv1}
 \label{sub:Determining Stability of Fixed points}
-
 \begin{figure}[h!]
-    \caption{Population size of the viral load and the immune response for a sin- gle virus strain with $r = 2.4, a = 2, b = 0.1, c = 1.$}
+    \caption{\textbf{\textit{Population size of the viral load and the immune response for a single virus strain with r = 2.4, a = 2, b = 0.1, c = 1.}}}
     \includegraphics[scale=.4]{imgs/hiv_graph1.png}
+    \label{fig:hiv1}
 \end{figure}
+
+\subsection{Modeling Our System With Multiple Viral Stains}
+\begin{equation}
+    \begin{split}
+        \dot v_i &= v_i(r - ax_i), \\
+        \dot x_i &= -bx_i + cv_i
+    \end{split}
+\end{equation}
+\label{sub:Modeling Our System With Multiple Viral Stains}
+
+
 \end{document}

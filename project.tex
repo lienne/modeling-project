@@ -171,17 +171,17 @@ Now we will shift our focus to HIV specifically. HIV, the precursor to AIDS, des
 	\label{eq:fixed}
 \end{equation}
 
-\subsection{Ebola Section}
+\section{Ebola Section}
 Ebola is known to evade the immune system and go undetected during infection. We present a mathematical model done by Thomas Wester from the U.S. Naval Academy, using a system of non-linear ordinary differential equations derived from known biological dynamics and a few biologically reasonable assumptions.
 
-\subsubsection{Biological Background}
+\subsection{Biological Background}
 Ebola is one of the deadliest viruses currently known to man and has resulted in several thousand cases and deaths as of recently, especially in epidemics happening in Africa and other highly impacted places. The Ebola virus produces one of the most lethal forms of hemorrhagic fever. As a result, the virus maintains mortality rates between 40\% and 90\%, averaging about 50\% and can cause death in less than two days, according to research done by Wester.\\
 \\
 Prior to the development of the mathematical model, it is crucial to understand how the human immune system responds to viral infections. Survival from Ebola virus highly depends on the host's ability to develop and manifest a strong response early after the introduction of the virus. A primary component of the immune system is the T-cell which has a lymphocyte. T-cell activation is one of the central events in the initiation of an adaptive immune response. There are two distinct populations of T-cells - Helper T-cells and Cytotoxic T-lymphocytes (from here on out referred to a CTLs) - and upon undergoing several binding events, the Helper T-cells and CTLs become activated.\\
 Activated Helper T-cells serve as the alarm system of the immune system, which aids in the activation and proliferation of CTLs, which possess the ability to kill the infected cell that the Helper T-cells identify as harmful.\\
 The main point to get from this is that CTL activation is the central event in the initiation of the immune system response and crucial for host survival and recovery. In Wester's research paper, he expands on analysis by considering CTL response to the introduction of the virus as well as the ability of the Ebola virus to evade detection by the host immune system.
 
-\subsubsection{The Herz Model}
+\subsection{The Herz Model}
 The Herz Model is a deterministic model for viral reproduction, which describes all events using a system of three equations:\\
 \\
 	x(t) = number of uninfected cells\\
@@ -208,7 +208,7 @@ In equation (14), $\alpha$ is the natural death rate of infected cells.
 In equation (15), c is the rate at which infected cells produce virus, and $\gamma$ is the natural attrition of free virus particles.\\
 
 
-\subsubsection{Ebola Application of the Herz Model}
+\subsection{Ebola Application of the Herz Model}
 Wester's model considers four distinct populations which are denoted:\\
 \\
 X(t): density of uninfected cells at time t,\\
@@ -229,7 +229,7 @@ Thus, we consider the mathematical model of Ebola virus infection with an immune
 
 With initial conditions X(0) = $X_{0}$, I(0) = $I_{0}$, V(0) = $V_{0}$, T(0) = $T_{0}$, and parameters $\lambda$ = growth rate of uninfected cells, $\mu$ = death rate of uninfected cells, $\beta$ = interaction rate of virus and uninfected cells, $\rho$ = interaction rate of infected cells and CTLs, $\alpha$ = death rate of infected cells, c = growth rate of virus, $\gamma$ = death rate of virus, and $\delta$ = death rate of CTLs.
 
-\subsubsection{Fixed Points (Equilibria)}
+\subsection{Fixed Points (Equilibria)}
 
 For the model we consider the equilibrium (fixed) point for the populations (X, I, V, T). At the equilibrium, the rate of change for each population is zero:
 
@@ -269,7 +269,7 @@ The Jacobian for the linearized system is:\\
 	\end{bmatrix}
 				\]\\
 
-\subsubsection{Stability Analysis for $P_{1}$}
+\subsection{Stability Analysis for $P_{1}$}
 
 The Jacobian evaluated at $P_{1}$ = ($\frac{\lambda}{\mu}$, 0, 0, 0) becomes:
 
@@ -303,9 +303,73 @@ such that
 
 \begin{equation}
 	- \frac{1}{\mu}(-x - \delta)(x + \mu)(-c \beta \lambda + x^2 \mu + x \alpha \mu + x\gamma \mu + \alpha \gamma \mu) = x^4 + a_{1}x^3 + a_{2}x^2 + a_{3}x + a_{4}
+\end{equation}\\
+
+Define:
+
+\begin{equation}
+	\begin{split}
+		R_{0} &= \frac{c \beta \lambda}{\alpha \gamma \mu} \\
+		R_{1} &= \frac{c \beta \lambda \rho}{\alpha (\gamma \rho \mu + c \beta \delta)}
+	\end{split}
+\end{equation}\\
+
+to be reproductive constants of the system.\\
+Biologically, $R_{0}$ represents the average number of infected cells produced by an initially infected cell over its lifetime. $R_{1}$ represents the number of infected cells that a single immune cell (CTL, in our case) is able to fight.
+
+For the Viral Free Equilibrium ($P_{1}$), if $R_{0} < 1$, then $P_{1}$ is stable; however, if $R_{0} > 1$, then $P_{1}$ is unstable.\\
+\\
+\\Insert figure of phase portrait here
+\\ Figure 1 illustrates the interaction between the virus and uninfected cell populations given that $R_{0}, R_{1} < 1$.
+
+\subsection{Stability Analysis for $P_{2}$}
+
+The Jacobian evaluated at $P_{2} = (\frac{\alpha \gamma}{c \beta}, \frac{c  \beta \lambda - \alpha \gamma \mu}{c \alpha \beta}, \frac{c \beta \lambda - \alpha \gamma \mu}{\alpha \beta \gamma}, 0)$ is:
+
+\[J_{2} =
+	\begin{bmatrix}
+		- \mu - \frac{c \beta \lambda - \alpha \gamma \mu}{\alpha \gamma} & 0 & - \frac{\alpha \lambda}{c} & 0 \\
+		\frac{c \beta \lambda - n\alpha \gamma \mu}{\alpha \gamma} & \alpha & \frac{\alpha \lambda}{c} & - \frac{(c \beta \lambda - \alpha \gamma \mu) \rho}{c \alpha \beta} \\
+		0 & c & - \gamma & 0 \\
+		0 & 0 & 0 & - \delta + \frac{(c \beta \lambda - \alpha \gamma \mu) \rho}{c \alpha \beta}
+	\end{bmatrix}
+\]\\
+
+and its characteristic equation:
+
+\begin{equation}
+	- \frac{1}{c^2 \alpha^2 \beta \gamma^2}(c^2 \alpha(x + \alpha) \beta(-x - \gamma) \gamma(x \alpha \gamma + c \beta \lambda) - c(-cx \alpha^3 \beta \gamma^3 - c \alpha^3 \beta \gamma^3 \mu))(-x - \delta + \frac{(c \beta \lambda - \alpha \gamma \mu)\rho}{c \alpha \beta}) = 0
 \end{equation}
 
-For the Viral Free Equilibrium ($P_{1}$), if $\frac{c \beta \lambda}{\alpha \gamma \mu} < 1$, then $P_{1}$ is stable; however, if $\frac{c \beta \lambda}{\alpha \gamma \mu} > 1$, then $P_{1}$ is unstable.
+
+$P_{2}$ is stable if and only if $R_{0} > 1$ and $R_{1} < 1$.\\
+
+Insert Figure of viral phase portrait here: A viral phase portrait for $R_{0}$ = 2.1089 and $R_{1}$ = 0.84356.\\
+Figure 2 illustrates the dynamic between the virus and uninfected cell populations given the values $R_{0} > 1$ and $R_{1} < 1$.
+
+\subsection{Stability Analysis for $P_{3}$}
+
+The Jacobian evaluated at $P_{3} = (\frac{\gamma \lambda \rho}{c \beta \delta + \gamma \mu \rho}, \frac{\delta}{\rho}, \frac{c \delta}{\gamma \rho}, \frac{-c \alpha \beta \gamma + c \beta \lambda \rho - \alpha \gamma \rho \mu}{\rho (c \beta \delta + \gamma \mu \rho)})$ is:
+
+\[J_{2} =
+	\begin{bmatrix}
+		- \mu - \frac{c \beta \delta}{\rho \gamma} & 0 & - \frac{\beta \gamma \lambda \rho}{c \beta \delta + \gamma \rho \mu} & 0 \\
+		\frac{c \beta \delta}{\rho \gamma} & \alpha - \frac{-c \alpha \beta \delta + c \beta \lambda \rho - \alpha \gamma \mu \rho}{c \beta \delta + \gamma \mu \rho} & \frac{\beta \gamma \lambda \rho}{c \beta \delta + \gamma \mu \rho} & - \delta \\
+		0 & c & - \gamma & 0 \\
+		0 & \frac{-c \alpha \beta \delta + c \beta \lambda \rho - \alpha \gamma \mu \rho}{c \beta \delta + \gamma \rho \mu} & 0 & 0
+	\end{bmatrix}
+\]\\
+
+and its characteristic equation:
+
+\begin{equation}
+	- \frac{x(\beta c \gamma^2(\mu + x) - (\alpha + x)(\gamma + x)(\beta c \delta + \gamma \mu \rho)(\beta c \delta + \gamma \rho (\mu + x))) + \rho Y(\gamma + x)(\beta c \delta + \gamma \rho (\mu + x))(\alpha \gamma \mu \rho + \beta c(\alpha \delta - \lambda \rho))}{\gamma \rho(\beta c \delta + \gamma \mu \rho)} = 0
+\end{equation}\\
+
+If $R_{1} > 1$, $R_{0} > \frac{\delta}{\mu}$, $c \beta > \alpha \rho$, $\lambda (\gamma + \delta) > \alpha \delta^2$, then $P_{3}$ is stable.\\
+
+Insert figure 3 here: A system phase portrait for $R_{0} = 4.6864$ and $R_{1} = 2.8119$.\\
+Similar to figure 2, the virus population appears to approach zero several times during the course of infection, reaching very low levels within the system.
 
 
 \section{Conclusion}

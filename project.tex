@@ -30,7 +30,7 @@ Here, $v$ is the viral strain. $x$ is the specific immune system response to the
 \subsubsection{Getting our eigenvalues}
 First we take the Jacobian matrix of our system, which is
 \begin{equation}
-    J =
+    J(v,x) =
     \begin{pmatrix}
         r-ax    & -av \\
         c       & -b
@@ -39,9 +39,9 @@ First we take the Jacobian matrix of our system, which is
 Then we find the characteristic equations by evaluating the Jacobian at the two fixed points of our system $(0,0)$ and $(\alpha,\beta)$, where $\alpha = \frac{br}{ac} $ and let $\beta = \frac{r}{a} $
 \begin{equation}
     \begin{split}
-        &J|_{(0,0)} - \lambda I = \lambda^2 + \lambda(b-r) -br = 0\\
+        &J(0,0) - \lambda I = \lambda^2 + \lambda(b-r) -br = 0\\
         &\implies \lambda_{1,2} = r,-b\\
-        &J|_{(\alpha,\beta)}  - \lambda I =  \lambda^2 + \lambda \gamma + \delta\\ 
+        &J(\alpha,\beta)  - \lambda I =  \lambda^2 + \lambda \gamma + \delta\\ 
         &\implies \lambda_{1,2} = \frac{-\gamma \pm \sqrt{\gamma^2 - 4\delta}}{2} \\
         \text{where} \\
         &\gamma =  b - r + a\beta \text{, and } \delta = ac\alpha + ab\beta -rb
@@ -78,7 +78,67 @@ This adds a degree of randomness to our behavior, as new viruses can appear at a
 \end{equation}
 Where $z$ is the cross reactive response that decays at rate $b$.  $v = \sum^{N}_{i=1} v_i$ is the total viral load. $q$ is the rate at which the virus evades the global response, and $k$ is the rate at which the global response grows in comparison to the number of preheat viral strains.
 
+
 \subsubsection{Getting Eigenvalues}
+First we take the Jacobian of the system of equations.
+%the jacobian
+\begin{equation}
+    J=
+    \begin{pmatrix}
+        -ax-qz+r    &-va    &-qv    \\
+        c           &-b     &0      \\
+        k           &0       &-b
+    \end{pmatrix}
+\end{equation}
+%the characteristic equation
+Next we find the characteristic equation
+\begin{equation}
+    \begin{split}
+        J - \lambda I &= \\ 
+        &-a{b}^{2}x-abcv-2\,ab\lambda\,x-ac\lambda\,v-a{\lambda}^{2}x-{b}^{2}qz -bkqv-2\,b\lambda\,qz-k\lambda\,qv \\
+        &-{\lambda}^{2}qz-{b}^{2}\lambda+{b}^ {2}r-2\,b{\lambda}^{2}+2\,b\lambda\,r-{\lambda}^{3}+{\lambda}^{2}r
+    \end{split}
+\end{equation}
+
+solving for lambda, we get the eigenvalues
+
+\begin{equation}
+    \begin{split}
+        \lambda_1 &=  -b\\
+        \lambda_2 &= -1/2\,ax-1/2\,qz-b/2+r/2 \\ 
+        &+1/2\,\sqrt {{a}^{2}{x}^{2}+2\,axqz+{q}^{2}{z} ^{2}-2\,abx-4\,acv-2\,axr-2\,bqz-4\,kqv-2\,qzr+{b}^{2}+2\,br+{r}^{2}} \\
+        \lambda_3 &= -1/2\,ax-1/2\,qz-b/2+r/2 \\ 
+        &-1/2\,\sqrt {{a}^{2}{x}^{2}+2\,axqz+{q}^{2}{z} ^{2}-2\,abx-4\,acv-2\,axr-2\,bqz-4\,kqv-2\,qzr+{b}^{2}+2\,br+{r}^{2}}
+    \end{split}
+\end{equation}
+
+
+\subsubsection{Modeling The Equation}
+
+\begin{equation}
+    \begin{split}
+        r = 2.4, a = 2, b=0.1,c=1,q=2.4,k=1
+    \end{split}
+    \label{eq:vals}
+\end{equation}
+
+Evaluating the characteristic equation at the fixed points $\{v = 0,x = 0,z = 0\}$ with the values in \ref{eq:vals} and solving for $\lambda$ we get
+\begin{equation}
+    \lambda_{1,2,3} = 2.4,-.1,-.1
+\end{equation}
+
+So we know that the point $(0,0,0)$ is a source. Now we need to find the interesting part of the equation. Setting our system of equations to zero and solving for $x,v\text{ and } z$ we get the fixed point
+%fixed points of equation
+\begin{equation}
+v ={\frac {br}{ac+kq}},x ={ \frac {cr}{ac+kq}},z={\frac {kr}{ac+kq}}
+    \label{eq:fixed}
+\end{equation}
+
+Evaluating the characteristic equation at the fixed points in \ref{eq:fixed} with the values in \ref{eq:vals} and solving for $\lambda$ we get
+\begin{equation}
+    \lambda_{1,2,3} = -.1,-.05 \pm .4873i
+\end{equation}
+So the fixed point $\{v = .0\overline{54}, x = .\overline{54}, z =.\overline{54}\}$ is a stable spiral. 
 
 \begin{figure}[h!]
     \centering
@@ -87,7 +147,9 @@ Where $z$ is the cross reactive response that decays at rate $b$.  $v = \sum^{N}
     \label{fig:hiv2}
 \end{figure}
 
+\subsection{HIV Section}
 
+\subsection{Ebola Section}
 
 \section{Conclusion}
 \label{sub:Conclusion}

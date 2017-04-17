@@ -7,7 +7,7 @@
 \begin{document}
 \maketitle
 \abstract{
-Here I am changing something i am belle lololol mea quidam pericula appellantur, ne quo vitae recteque. Duo ullum deserunt definitiones ea, ex has vocent constituam inciderint, at novum philosophia has. Summo facete audire eu pro, mazim tritani tibique ne quo. Justo deterruisset reprehendunt qui cu, nam te debet oblique incorrupte. Usu nominavi copiosae patrioque et, nec ferri constituto ei.
+babkabkaka mea quidam pericula appellantur, ne quo vitae recteque. Duo ullum deserunt definitiones ea, ex has vocent constituam inciderint, at novum philosophia has. Summo facete audire eu pro, mazim tritani tibique ne quo. Justo deterruisset reprehendunt qui cu, nam te debet oblique incorrupte. Usu nominavi copiosae patrioque et, nec ferri constituto ei.
 
 }
 \section{Introduction}
@@ -30,7 +30,7 @@ Here, $v$ is the viral strain. $x$ is the specific immune system response to the
 \subsubsection{Getting our eigenvalues}
 First we take the Jacobian matrix of our system, which is
 \begin{equation}
-    J(v,x) =
+    J =
     \begin{pmatrix}
         r-ax    & -av \\
         c       & -b
@@ -51,13 +51,21 @@ Then we find the characteristic equations by evaluating the Jacobian at the two 
 We will now model our system of equations with conditions $r = 2.4, a = 2, b = 0.1, \text{ and }c = 1.$. We will also assume that we are starting with no viruses and no immune response.
 \label{sub:modeling the sytem}
 
-The fixed point $(0,0)$ coresponds to the eigenvalues $\lambda_1 = 2.4, \lambda_2 = -.1$, which implies that $(0,0)$ is a saddle point. The fixed point $(\alpha,\beta) = (.12,1.2)$ results in eigenvalues $\lambda_1 = -.05 + 4.873i , \lambda_2 = -.05 - 4873i$, which implies that the point $(.12,1.2)$ is a spiral sink. So in this system both the viral strain and immune response will begin oscillating dramatically and then as time approaches infinity, they will settle to stable values. This is illustrated in figure \ref{fig:hiv1}
+The fixed point $(0,0)$ corresponds to the eigenvalues $\lambda_1 = 2.4, \lambda_2 = -.1$, which implies that $(0,0)$ is a saddle point. The fixed point $(\alpha,\beta) = (.12,1.2)$ results in eigenvalues $\lambda_1 = -.05 + 4.873i , \lambda_2 = -.05 - 4873i$, which implies that the point $(.12,1.2)$ is a spiral sink. So in this system both the viral strain and immune response will begin oscillating dramatically and then as time approaches infinity, they will settle to stable values. This is illustrated in figure \ref{fig:hiv1}
 \label{sub:Determining Stability of Fixed points}
-\begin{figure}[h!]
+\begin{figure}[!tbp]
     \centering
-    \caption{\textbf{\textit{Population size of the viral load and the immune response for a single virus strain with r = 2.4, a = 2, b = 0.1, c = 1.}}}
-    \includegraphics[scale=.4]{imgs/hiv_graph1.png}
-    \label{fig:hiv1}
+    \begin{minipage}[b]{0.4\textwidth}
+	    \caption{\textbf{\textit{Population sizes for a single virus strain with r = 2.4, a = 2, b = 0.1, c = 1.}}}
+	    \includegraphics[scale=.25]{imgs/hiv_graph1.png}
+	    \label{fig:hiv1}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[b]{0.4\textwidth}
+		\caption{\textbf{\textit{Population sizes for multiple strains  with r = 2.4, a = 2, b=0.1,c=1,q=2.4,k=1.}}}
+		\includegraphics[scale=.25]{imgs/hiv_graph2.png}
+		\label{fig:hiv2}
+	\end{minipage}
 \end{figure}
 
 \subsection{Modeling the System with Multiple Viral Strains}
@@ -80,23 +88,35 @@ Where $z$ is the cross reactive response that decays at rate $b$.  $v = \sum^{N}
 
 
 \subsubsection{Getting Eigenvalues}
-First we take the Jacobian of the system of equations.
+In this case we are going to be introducing a the variable:
+\[
+V = \sum_{i = 1}^N v_i
+\]
+We will assume that $V$ is constant at each iteration. Thus our new system of equations becomes 
+\begin{equation}
+	\begin{split}
+		\dot v &= v(r - ax - qz) \\
+		\dot x &= -bx + cv \\
+		\dot z &= kV - bz
+	\end{split}
+\end{equation}
+First we take the Jacobian of the system of equations. 
 %the jacobian
 \begin{equation}
     J=
     \begin{pmatrix}
         -ax-qz+r    &-va    &-qv    \\
         c           &-b     &0      \\
-        k           &0       &-b
+        0           &0       &-b
     \end{pmatrix}
 \end{equation}
 %the characteristic equation
 Next we find the characteristic equation
 \begin{equation}
     \begin{split}
-        J - \lambda I &= \\ 
-        &-a{b}^{2}x-abcv-2\,ab\lambda\,x-ac\lambda\,v-a{\lambda}^{2}x-{b}^{2}qz -bkqv-2\,b\lambda\,qz-k\lambda\,qv \\
-        &-{\lambda}^{2}qz-{b}^{2}\lambda+{b}^ {2}r-2\,b{\lambda}^{2}+2\,b\lambda\,r-{\lambda}^{3}+{\lambda}^{2}r
+        | J - \lambda I | &= \\ 
+        &-a{b}^{2}x-abcv-2\,ab\lambda\,x-ac\lambda\,v-a{\lambda}^{2}x-{b}^{2}qz \\
+        &-2\,b\lambda\,qz-{\lambda}^{2}qz-{b}^{2}\lambda+{b}^{2}r-2\,b{\lambda}^{2}+2\,b\lambda\,r-{\lambda}^{3}+{\lambda}^{2}r
     \end{split}
 \end{equation}
 
@@ -105,15 +125,15 @@ solving for lambda, we get the eigenvalues
 \begin{equation}
     \begin{split}
         \lambda_1 &=  -b\\
-        \lambda_2 &= -1/2\,ax-1/2\,qz-b/2+r/2 \\ 
-        &+1/2\,\sqrt {{a}^{2}{x}^{2}+2\,axqz+{q}^{2}{z} ^{2}-2\,abx-4\,acv-2\,axr-2\,bqz-4\,kqv-2\,qzr+{b}^{2}+2\,br+{r}^{2}} \\
-        \lambda_3 &= -1/2\,ax-1/2\,qz-b/2+r/2 \\ 
-        &-1/2\,\sqrt {{a}^{2}{x}^{2}+2\,axqz+{q}^{2}{z} ^{2}-2\,abx-4\,acv-2\,axr-2\,bqz-4\,kqv-2\,qzr+{b}^{2}+2\,br+{r}^{2}}
+        \lambda_{2,3} &= -1/2\,ax-1/2\,qz-b/2+r/2 \\
+        &\pm 1/2\,\sqrt {{a}^{2}{x}^{2}+2\,axqz+{q}^{2}{z}^{2}-2\,abx-4\,acv-2\,axr-2\,bqz-2\,qzr+{b}^{2}+2\,br+{r}^{2}}         
     \end{split}
 \end{equation}
 
 
 \subsubsection{Modeling The Equation}
+
+We will be studying the behavior of this equation with the values
 
 \begin{equation}
     \begin{split}
@@ -122,35 +142,171 @@ solving for lambda, we get the eigenvalues
     \label{eq:vals}
 \end{equation}
 
-Evaluating the characteristic equation at the fixed points $\{v = 0,x = 0,z = 0\}$ with the values in \ref{eq:vals} and solving for $\lambda$ we get
-\begin{equation}
-    \lambda_{1,2,3} = 2.4,-.1,-.1
-\end{equation}
+Our first step is to determine the fixed points of the system of equations. In this case there are two.
 
-So we know that the point $(0,0,0)$ is a source. Now we need to find the interesting part of the equation. Setting our system of equations to zero and solving for $x,v\text{ and } z$ we get the fixed point
 %fixed points of equation
 \begin{equation}
-v ={\frac {br}{ac+kq}},x ={ \frac {cr}{ac+kq}},z={\frac {kr}{ac+kq}}
-    \label{eq:fixed}
+	\begin{split}
+		&\text{Fixed point 1: } \quad v=0,x=0,z={\frac {kV}{b}} \\
+		&\text{Fixed point 2: } \quad v=-{\frac {qkV-br}{ac}},x=-{\frac {qkV-br}{ab}},z={\frac {kV}{b}} 
+	\end{split}
+	\label{eq:fixed}
 \end{equation}
 
-Evaluating the characteristic equation at the fixed points in \ref{eq:fixed} with the values in \ref{eq:vals} and solving for $\lambda$ we get
-\begin{equation}
-    \lambda_{1,2,3} = -.1,-.05 \pm .4873i
-\end{equation}
-So the fixed point $\{v = .0\overline{54}, x = .\overline{54}, z =.\overline{54}\}$ is a stable spiral. 
+Our observations show that our first fixed point will act as a source and the second will act as a spiral sink. This is demonstrated in figure \ref{fig:hiv2}
 
-\begin{figure}[h!]
-    \centering
-    \caption{\textbf{\textit{Example of a cross-reactive immune response. The total population sizes of the viral load and the immune response are shown for r = 2.4, a = 2, b=0.1,c=1,q=2.4,k=1 with a random probability for the rise of new virus strains.}}}
-    \includegraphics[scale=.4]{imgs/hiv_graph2.png}
-    \label{fig:hiv2}
-\end{figure}
+
+
+
 
 \subsection{HIV Section}
 Now we will shift our focus to HIV specifically. HIV, the precursor to AIDS, destroys the immune system so the body cannot fight back against any illness, viral or otherwise. It kills white blood cells (a specific type known as a CD4 cell) and makes copies of itself within said cell. This will use our same system as before with our multiple viral strains with two differences; this time, a damping term is introduced in our equations for our immune cell production and our global immune response equation, reflecting the destruction of the body’s immune cell production and the slowing of the global immune response, respectively.
 
+%fixed points of equation
+\begin{equation}
+	\begin{split}
+		&\text{Fixed point 1: } \quad v=0,x=0,z={\frac {kV}{Vu+b}}   \\
+		&\text{Fixed point 2: } \quad  v=-{\frac {qkV-Vru-br}{ac}},x=-{\frac {qkV-Vru-br}{a \left( Vu+b \right) }},z={\frac {kV}{Vu+b}}
+	\end{split}
+	\label{eq:fixed}
+\end{equation}
+
 \subsection{Ebola Section}
+Ebola is known to evade the immune system and go undetected during infection. We present a mathematical model done by Thomas Wester from the U.S. Naval Academy, using a system of non-linear ordinary differential equations derived from known biological dynamics and a few biologically reasonable assumptions.
+
+\subsubsection{Biological Background}
+Ebola is one of the deadliest viruses currently known to man and has resulted in several thousand cases and deaths as of recently, especially in epidemics happening in Africa and other highly impacted places. The Ebola virus produces one of the most lethal forms of hemorrhagic fever. As a result, the virus maintains mortality rates between 40\% and 90\%, averaging about 50\% and can cause death in less than two days, according to research done by Wester.\\
+\\
+Prior to the development of the mathematical model, it is crucial to understand how the human immune system responds to viral infections. Survival from Ebola virus highly depends on the host's ability to develop and manifest a strong response early after the introduction of the virus. A primary component of the immune system is the T-cell which has a lymphocyte. T-cell activation is one of the central events in the initiation of an adaptive immune response. There are two distinct populations of T-cells - Helper T-cells and Cytotoxic T-lymphocytes (from here on out referred to a CTLs) - and upon undergoing several binding events, the Helper T-cells and CTLs become activated.\\
+Activated Helper T-cells serve as the alarm system of the immune system, which aids in the activation and proliferation of CTLs, which possess the ability to kill the infected cell that the Helper T-cells identify as harmful.\\
+The main point to get from this is that CTL activation is the central event in the initiation of the immune system response and crucial for host survival and recovery. In Wester's research paper, he expands on analysis by considering CTL response to the introduction of the virus as well as the ability of the Ebola virus to evade detection by the host immune system.
+
+\subsubsection{The Herz Model}
+The Herz Model is a deterministic model for viral reproduction, which describes all events using a system of three equations:\\
+\\
+	x(t) = number of uninfected cells\\
+	y(t) = number of infected cells\\
+	v(t) = number of free virus particles\\
+\\
+And a modification, since contact between a virus and a cell reduces the number of available free virus.
+
+\begin{equation}
+		\dot x = \lambda - \mu x - \beta vx\\
+\end{equation}
+\begin{equation}
+		\dot y = \beta vx - \alpha y\\
+\end{equation}
+\begin{equation}
+		\dot v' = cy - \gamma v\\
+\end{equation}
+\begin{equation}
+		\dot v = cy - \gamma v - \beta vx\\
+\end{equation}
+
+In equation (13), $\lambda$, $\mu$, and $\beta$ are the supply, death, and virus infection rates of uninfected cells, respectively.
+In equation (14), $\alpha$ is the natural death rate of infected cells.
+In equation (15), c is the rate at which infected cells produce virus, and $\gamma$ is the natural attrition of free virus particles.\\
+
+
+\subsubsection{Ebola Application of the Herz Model}
+Wester's model considers four distinct populations which are denoted:\\
+\\
+X(t): density of uninfected cells at time t,\\
+I(t): density of infected cells at time t,\\
+V(t): density of virus at time t,\\
+T(t): density of CTL cells at time t.\\
+\\
+Thus, we consider the mathematical model of Ebola virus infection with an immune response given by the following 4-dimensional non-linear system of ordinary differential equations:
+
+\begin{equation}
+\begin{split}
+	\dot X &= \lambda - \mu X(t) - \beta V(t)X(t) \\
+	\dot I &= \beta V(t)X(t) - \rho I(t)T(t) - \alpha I(t) \\
+	\dot V &= cI(t) - \gamma V(t) \\
+	\dot T &= \rho I(t)T(t) - \delta T(t) \\
+\end{split}
+\end{equation}
+
+With initial conditions X(0) = $X_{0}$, I(0) = $I_{0}$, V(0) = $V_{0}$, T(0) = $T_{0}$, and parameters $\lambda$ = growth rate of uninfected cells, $\mu$ = death rate of uninfected cells, $\beta$ = interaction rate of virus and uninfected cells, $\rho$ = interaction rate of infected cells and CTLs, $\alpha$ = death rate of infected cells, c = growth rate of virus, $\gamma$ = death rate of virus, and $\delta$ = death rate of CTLs.
+
+\subsubsection{Fixed Points (Equilibria)}
+
+For the model we consider the equilibrium (fixed) point for the populations (X, I, V, T). At the equilibrium, the rate of change for each population is zero:
+
+\begin{equation}
+	\begin{split}
+		\dot X &= 0 \\
+		\dot I &= 0 \\
+		\dot V &= 0 \\
+		\dot T &= 0 \\
+	\end{split}
+\end{equation}
+
+If the values for any population at the fixed point is zero, those cells are defined as extinct, meaning that at long times, the populations will cease to exist. Thus, if V = I = 0 at the fixed point, the virus is extinct from the body as t $\rightarrow$ $\infty$, and the fixed point is known are Viral Free equilibrium. However, if the value for any population at the fixed point is not zero, those cells are defined as persistent. Thus, if V $\neq$ 0 and I $\neq$ 0, then the virus persists and the fixed point is known as Viral Persistence equilibrium. In addition, if T $\neq$ 0, then the immune response persists as t $\rightarrow$ $\infty$ and the fixed point is known as Immune Persistence equilibrium.\\
+\\
+If the system takes on an equilibrium at any time, it will remain at the value for all remaining time; however, unless the initial conditions are exactly one of the fixed points, the system need not necessarily obtain these values. The system may approach the fixed point, move away from the fixed point, or cycle between specific fixed points. In order to accurately determine which type of behavior we will obtain, we perform a stability analysis by linearizing the system and thus calculating the Jacobian matrix, which provides a linear approximation, and that occurs at the fixed points, which will be denoted $P_{n}$ from here on out.\\
+\\
+Here we present the relevant fixed points, $P_{n}$ = (X, I, V, T) for n = 1, 2, 3:
+
+\begin{equation}
+	\begin{split}
+		P_{1} &= (\frac{\lambda}{\mu}, 0, 0)\\	
+		P_{2} &= (\frac{\alpha \gamma}{c \beta}, \frac{c  \beta \lambda - \alpha \gamma \mu}{c \alpha \beta}, \frac{c \beta \lambda - \alpha \gamma \mu}{\alpha \beta \gamma}, 0)\\
+		P_{3} &= (\frac{\gamma \lambda \rho}{c \beta \delta + \gamma \mu \rho}, \frac{\delta}{\rho}, \frac{c \delta}{\gamma \rho}, \frac{-c \alpha \beta \gamma + c \beta \lambda \rho - \alpha \gamma \rho \mu}{\rho (c \beta \delta + \gamma \mu \rho)})\\
+	\end{split}
+\end{equation}
+
+With $P_{1}$ being the Viral Free equilibrium, and $P_{2}$ and $P_{3}$ representing the Viral Persistence equilibrium.\\
+\\
+The Jacobian for the linearized system is:\\
+
+\[J(X, I, V, T) =
+	\begin{bmatrix}
+		V \beta - \mu & 0 & -X \beta & 0 \\
+		V \beta & \alpha - T \rho & X \beta & -I \rho \\
+		0 & c & - \gamma & 0 \\
+		0 & T \rho & 0 & - \delta + I \rho
+	\end{bmatrix}
+				\]\\
+
+\subsubsection{Stability Analysis for $P_{1}$}
+
+The Jacobian evaluated at $P_{1}$ = ($\frac{\lambda}{\mu}$, 0, 0, 0) becomes:
+
+\[J_{1} =
+	\begin{bmatrix}
+		- \mu & 0 & - \frac{\beta \lambda}{\mu} & 0 \\
+		0 & \alpha & \frac{\beta \lambda}{\mu} & 0 \\
+		0 & c & - \gamma & 0 \\
+		0 & 0 & 0 & - \delta
+	\end{bmatrix}
+\]\\
+
+and its characteristic equation:
+
+\begin{equation}
+	- \frac{1}{\mu}(-x - \delta)(x + \mu)(-c \beta \lambda + x^2 \mu + x \alpha \mu + x \gamma \mu + \alpha \gamma \mu) = 0
+\end{equation}
+
+From the characteristic equation we can define:
+
+\begin{equation}
+	\begin{split}
+		a_{1} &= \alpha + \gamma + \delta + \mu \\
+		a_{2} &= \alpha (\gamma + \delta + \mu) - \frac{\beta c \lambda}{\mu} + \gamma (\delta + \mu) + \delta \mu \\
+		a_{3} &= \frac{\mu (\alpha (\gamma (\delta + \mu) + \delta \mu) + \gamma \delta \mu ) - \beta c \lambda (\delta + \mu)}{\mu} \\
+		a_{4} &= \alpha \gamma \delta \mu - \beta c \delta \lambda
+	\end{split}
+\end{equation}
+
+such that
+
+\begin{equation}
+	- \frac{1}{\mu}(-x - \delta)(x + \mu)(-c \beta \lambda + x^2 \mu + x \alpha \mu + x\gamma \mu + \alpha \gamma \mu) = x^4 + a_{1}x^3 + a_{2}x^2 + a_{3}x + a_{4}
+\end{equation}
+
+For the Viral Free Equilibrium ($P_{1}$), if $\frac{c \beta \lambda}{\alpha \gamma \mu} < 1$, then $P_{1}$ is stable; however, if $\frac{c \beta \lambda}{\alpha \gamma \mu} > 1$, then $P_{1}$ is unstable.
+
 
 \section{Conclusion}
 \label{sub:Conclusion}

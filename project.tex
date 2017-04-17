@@ -20,10 +20,10 @@ Lorem ipsum dolor sit amet, id mea quidam pericula appellantur, ne quo vitae rec
 
 \subsection{Immune System Response to a Single Viral Strain}
 \begin{equation}
-    \begin{split}
+    \begin{cases}
         \dot v &= v(r-ax) = f_1(v,x), \\
         \dot x &= -bx + cv = f_2(v,x)
-    \end{split}
+    \end{cases}
 \end{equation}
 
 Here, $v$ is the viral strain. $x$ is the specific immune system response to the strain. $r$ is the rate at which the virus reproduces. $a$ is the rate at which the immune cells destroy the virus. $b$ is the rate at which the immune cells die off. $c$ is rate at which the immune cells reproduce, which is dependent on the number of viruses present, $v$.  
@@ -71,34 +71,35 @@ The fixed point $(0,0)$ corresponds to the eigenvalues $\lambda_1 = 2.4, \lambda
 \subsection{Modeling the System with Multiple Viral Strains}
 Suppose there are $N$ strains of the virus.  The $i$th strain of the virus $v_i$ and the immunal reaction $x_i$ to it can be modeled by the system of equations
 \begin{equation}
-    \begin{split}
+    \begin{cases}
         \dot v_i &= v_i(r - ax_i), \\
         \dot x_i &= -bx_i + cv_i
-    \end{split}
+    \end{cases}
 \end{equation}
 This adds a degree of randomness to our behavior, as new viruses can appear at any point in time. We may begin with only one virus, which can proceed to mutate as it pleases, or we may begin with many strains. Each new viral strain should result in a new immune response. Eventually, a global immune response will take care of all $N$ viral strains regardless of mutation or rate of mutation. This global response can be modeled by the system of equations
 \begin{equation}
-    \begin{split}
+    \begin{cases}
         \dot v_i &= v_i(r - ax_i - qz) \\
         \dot x_i &= -bx_i + cv_i \\
         \dot z &= kv - bz
-    \end{split}
+    \end{cases}
 \end{equation}
 Where $z$ is the cross reactive response that decays at rate $b$.  $v = \sum^{N}_{i=1} v_i$ is the total viral load. $q$ is the rate at which the virus evades the global response, and $k$ is the rate at which the global response grows in comparison to the number of preheat viral strains.
 
 
 \subsubsection{Getting Eigenvalues}
+\label{sec:hiv2_evals}
 In this case we are going to be introducing a the variable:
 \[
 V = \sum_{i = 1}^N v_i
 \]
 We will assume that $V$ is constant at each iteration. Thus our new system of equations becomes 
 \begin{equation}
-	\begin{split}
+	\begin{cases}
 		\dot v &= v(r - ax - qz) \\
 		\dot x &= -bx + cv \\
 		\dot z &= kV - bz
-	\end{split}
+	\end{cases}
 \end{equation}
 First we take the Jacobian of the system of equations. 
 %the jacobian
@@ -156,22 +157,90 @@ Our first step is to determine the fixed points of the system of equations. In t
 Our observations show that our first fixed point will act as a source and the second will act as a spiral sink. This is demonstrated in figure \ref{fig:hiv2}
 
 
-
-
-
 \subsection{HIV Section}
+
 Now we will shift our focus to HIV specifically. HIV, the precursor to AIDS, destroys the immune system so the body cannot fight back against any illness, viral or otherwise. It kills white blood cells (a specific type known as a CD4 cell) and makes copies of itself within said cell. This will use our same system as before with our multiple viral strains with two differences; this time, a damping term is introduced in our equations for our immune cell production and our global immune response equation, reflecting the destruction of the body’s immune cell production and the slowing of the global immune response, respectively.
 
-%fixed points of equation
 \begin{equation}
-	\begin{split}
-		&\text{Fixed point 1: } \quad v=0,x=0,z={\frac {kV}{Vu+b}}   \\
-		&\text{Fixed point 2: } \quad  v=-{\frac {qkV-Vru-br}{ac}},x=-{\frac {qkV-Vru-br}{a \left( Vu+b \right) }},z={\frac {kV}{Vu+b}}
-	\end{split}
-	\label{eq:fixed}
+	\begin{cases}
+		\dot v_i &= v_i (r-ax_i-qz)\\
+		\dot x_i &= -bx_i + cv_i - uvx_i\\
+		\dot z &= kv - bz - uvz
+	\end{cases}
 \end{equation}
 
+Once again we will be introduce the variable $V$ as defined in section \ref{sec:hiv2_evals}. Thus we have the new system of equations that we can study to observe the interactions between viruses and immune response in this scenario.
+
+\begin{equation}
+	\begin{cases}
+		\dot v=& v \left( -ax-qz+r \right) \\
+		\dot x=& -uVx-bx+cv \\
+		\dot z=& -uVz+kV-bz
+	\end{cases}
+\end{equation}
+
+\begin{figure}[!tbp]
+	\centering
+	\includegraphics[scale=.5]{imgs/hiv_graph3.png}
+	\caption{\textbf{\textit{The total population sizes of the
+				viral load and the immune response with r = 2.4, a = 2, b = 0.1, c = 1,q = 2.4, k = 1, and u = 1}}}
+	\label{fig:hiv3}
+\end{figure}
+
+\subsubsection{Identifying Eigenvalues}
+As in previous sections our first step is to find the Jacobian
+\begin{equation}
+J = \left( \begin {array}{ccc} -ax-qz+r&-va&-vq\\ \noalign{\medskip}c&-Vu
+-b&0\\ \noalign{\medskip}0&0&-Vu-b\end {array} \right) 
+\end{equation}
+From here we can evaluate our characteristic equation. 
+\begin{equation}
+	\begin{split}
+		|J-\lambda I| &= -{V}^{2}a{u}^{2}x-{V}^{2}q{u}^{2}z-{V}^{2}\lambda\,{u}^{2}+{V}^{2}r{u}
+		^{2}-2\,Vabux-Vacuv-2\,Va\lambda\,ux \\
+		&-2\,Vbquz-2\,V\lambda\,quz-2\,Vb
+		\lambda\,u+2\,Vbru-2\,V{\lambda}^{2}u+2\,V\lambda\,ru-a{b}^{2}x-abcv \\
+		&-2\,ab\lambda\,x-ac\lambda\,v-a{\lambda}^{2}x-{b}^{2}qz-2\,b\lambda\,qz-
+		{\lambda}^{2}qz-{b}^{2}\lambda+{b}^{2}r-2\,b{\lambda}^{2}+2\,b\lambda
+		\,r-{\lambda}^{3}+{\lambda}^{2}r			
+	\end{split}
+\end{equation}
+
+<<<<<<< HEAD
 \section{Ebola Section}
+=======
+Finally, by solving our characteristic equation for $\lambda$ we can obtain our eigenvalues.
+
+\begin{equation}
+	\begin{split}
+		\lambda_1 &= -Vu-b \\
+		\lambda_{2,3} &= -1/2\,Vu-1/2\,ax-1/2\,qz-b/2+r/2 \pm 1/2\,\sqrt {\Phi}	\\
+		\text{ where } \Phi  &= {V}^{2}{u}^{2}-2\,Vaux-2
+		\,Vquz+{a}^{2}{x}^{2}+2\,axqz+{q}^{2}{z}^{2} \\
+		&+2\,Vbu+2\,Vru-2\,abx-4\,c
+		va-2\,arx-2\,bqz-2\,qzr+{b}^{2}+2\,br+{r}^{2}		
+	\end{split}
+\end{equation}
+
+\subsubsection{Modeling The Equation}
+We now present a model of the this system of equation with the following values:
+\begin{equation}
+a=2,b= 0.1,c=1,k=1,q= 2.4,r= 2.4,u=1
+\end{equation}
+At the following stable nodes:
+\begin{equation}
+\begin{split}
+&\text{Fixed point 1: } \quad v=0,x=0,z={\frac {kV}{Vu+b}}   \\
+&\text{Fixed point 2: } \quad  v=-{\frac {qkV-Vru-br}{ac}},x=-{\frac {qkV-Vru-br}{a \left( Vu+b \right) }},z={\frac {kV}{Vu+b}}
+\end{split}
+\label{eq:fixed}
+\end{equation}
+In this case, our virus will continue to grow as our immune system response stabilizes. Thus the host will die. 
+%fixed points of equation
+This is demonstrated in figure \ref{fig:hiv3}.
+
+\subsection{Ebola Section}
+>>>>>>> kablaa/master
 Ebola is known to evade the immune system and go undetected during infection. We present a mathematical model done by Thomas Wester from the U.S. Naval Academy, using a system of non-linear ordinary differential equations derived from known biological dynamics and a few biologically reasonable assumptions.
 
 \subsection{Biological Background}
@@ -383,6 +452,9 @@ Lorem ipsum dolor sit amet, id mea quidam pericula appellantur, ne quo vitae rec
 Michel Goossens, Frank Mittelbach, and Alexander Samarin. 
 \textit{The \LaTeX\ Companion}. 
 Addison-Wesley, Reading, Massachusetts, 1993.
+
+
+
 \end{thebibliography}
 
 

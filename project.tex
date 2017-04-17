@@ -18,7 +18,7 @@ Lorem ipsum dolor sit amet, id mea quidam pericula appellantur, ne quo vitae rec
 \section{Research and Methods}
 \label{sec:Main part}
 
-\subsection{Immunal response to a single viral strain}
+\subsection{Immune System Response to a Single Viral Strain}
 \begin{equation}
     \begin{split}
         \dot v &= v(r-ax) = f_1(v,x), \\
@@ -26,9 +26,9 @@ Lorem ipsum dolor sit amet, id mea quidam pericula appellantur, ne quo vitae rec
     \end{split}
 \end{equation}
 
-Where $v$ is the viral strain and $x$ is the specific immune response to the strain. $r$ is the rate at which the virus reproduces. $a$ is the rate at which the immune cells destroy the virus. $b$ is the rate at which the immune cells die off. $c$ is rate at which the immune cells reproduce. This is dependent on the number of viruses present, $v$.  
+Here, $v$ is the viral strain. $x$ is the specific immune system response to the strain. $r$ is the rate at which the virus reproduces. $a$ is the rate at which the immune cells destroy the virus. $b$ is the rate at which the immune cells die off. $c$ is rate at which the immune cells reproduce, which is dependent on the number of viruses present, $v$.  
 \subsubsection{Getting our eigenvalues}
-First we take the Jacobian
+First we take the Jacobian matrix of our system, which is
 \begin{equation}
     J =
     \begin{pmatrix}
@@ -47,9 +47,9 @@ Then we find the characteristic equations by evaluating the Jacobian at the two 
         &\gamma =  b - r + a\beta \text{, and } \delta = ac\alpha + ab\beta -rb
     \end{split}
 \end{equation}
-\subsubsection{modeling our system with one viral strain}
+\subsubsection{Modeling the System With One Viral Strain}
 We will now model our system of equations with conditions $r = 2.4, a = 2, b = 0.1, \text{ and }c = 1.$. We will also assume that we are starting with no viruses and no immune response.
-\label{sub:modeling our sytem}
+\label{sub:modeling the sytem}
 
 The fixed point $(0,0)$ coresponds to the eigenvalues $\lambda_1 = 2.4, \lambda_2 = -.1$, which implies that $(0,0)$ is a saddle point. The fixed point $(\alpha,\beta) = (.12,1.2)$ results in eigenvalues $\lambda_1 = -.05 + 4.873i , \lambda_2 = -.05 - 4873i$, which implies that the point $(.12,1.2)$ is a spiral sink. So in this system both the viral strain and immune response will begin oscillating dramatically and then as time approaches infinity, they will settle to stable values. This is illustrated in figure \ref{fig:hiv1}
 \label{sub:Determining Stability of Fixed points}
@@ -60,7 +60,7 @@ The fixed point $(0,0)$ coresponds to the eigenvalues $\lambda_1 = 2.4, \lambda_
     \label{fig:hiv1}
 \end{figure}
 
-\subsection{Modeling Our System with Multiple Viral Strains}
+\subsection{Modeling the System with Multiple Viral Strains}
 Suppose there are $N$ strains of the virus.  The $i$th strain of the virus $v_i$ and the immunal reaction $x_i$ to it can be modeled by the system of equations
 \begin{equation}
     \begin{split}
@@ -68,7 +68,7 @@ Suppose there are $N$ strains of the virus.  The $i$th strain of the virus $v_i$
         \dot x_i &= -bx_i + cv_i
     \end{split}
 \end{equation}
-This adds a degree of randomness to our behavior as new viruses can appear at any point in time. Each new virus strain should result in a new immune response. Eventually a global immune response will take care of all $N$ viral strains regardless of mutation. This global response can be modeled by the system of equations
+This adds a degree of randomness to our behavior, as new viruses can appear at any point in time. We may begin with only one virus, which can proceed to mutate as it pleases, or we may begin with many strains. Each new viral strain should result in a new immune response. Eventually, a global immune response will take care of all $N$ viral strains regardless of mutation or rate of mutation. This global response can be modeled by the system of equations
 \begin{equation}
     \begin{split}
         \dot v_i &= v_i(r - ax_i - qz) \\
@@ -76,7 +76,7 @@ This adds a degree of randomness to our behavior as new viruses can appear at an
         \dot z &= kv - bz
     \end{split}
 \end{equation}
-Where $z$ is the cross reactive response that decays at rate $b$.  $v = \sum^{N}_{i=1} v_i$ is the total viral load. $q$ is the rate at which the virus evades the global response, $k$ is the rate at which the global response grows in comparison to the number of preheat viral strains.
+Where $z$ is the cross reactive response that decays at rate $b$.  $v = \sum^{N}_{i=1} v_i$ is the total viral load. $q$ is the rate at which the virus evades the global response, and $k$ is the rate at which the global response grows in comparison to the number of preheat viral strains.
 
 \subsubsection{Getting Eigenvalues}
 

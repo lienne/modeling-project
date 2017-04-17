@@ -1,8 +1,0 @@
-\contentsline {section}{\numberline {1}Introduction}{1}
-\contentsline {section}{\numberline {2}Research and Methods}{1}
-\contentsline {subsection}{\numberline {2.1}Immunal response to a single viral strain}{1}
-\contentsline {subsubsection}{\numberline {2.1.1}Getting our eigenvalues}{1}
-\contentsline {subsubsection}{\numberline {2.1.2}modeling our system with one viral strain}{2}
-\contentsline {subsection}{\numberline {2.2}Modeling Our System }{2}
-\contentsline {subsubsection}{\numberline {2.2.1}Getting Eigenvalues}{3}
-\contentsline {subsection}{\numberline {2.3}Conclusion}{3}

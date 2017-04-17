@@ -30,7 +30,7 @@ Where $v$ is the viral strain and $x$ is the specific immune response to the str
 \subsubsection{Getting our eigenvalues}
 First we take the Jacobian
 \begin{equation}
-    J(v,x) =
+    J =
     \begin{pmatrix}
         r-ax    & -av \\
         c       & -b
@@ -51,7 +51,7 @@ Then we find the characteristic equations by evaluating the Jacobian at the two 
 We will now model our system of equations with conditions $r = 2.4, a = 2, b = 0.1, \text{ and }c = 1.$. We will also assume that we are starting with no viruses and no immune response.
 \label{sub:modeling our sytem}
 
-The fixed point $(0,0)$ coresponds to the eigenvalues $\lambda_1 = 2.4, \lambda_2 = -.1$, which implies that $(0,0)$ is a saddle point. The fixed point $(\alpha,\beta) = (.12,1.2)$ results in eigenvalues $\lambda_1 = -.05 + 4.873i , \lambda_2 = -.05 - 4873i$, which implies that the point $(.12,1.2)$ is a spiral sink. So in this system both the viral strain and immune response will begin oscillating dramatically and then as time approaches infinity, they will settle to stable values. This is illustrated in figure \ref{fig:hiv1}
+The fixed point $(0,0)$ corresponds to the eigenvalues $\lambda_1 = 2.4, \lambda_2 = -.1$, which implies that $(0,0)$ is a saddle point. The fixed point $(\alpha,\beta) = (.12,1.2)$ results in eigenvalues $\lambda_1 = -.05 + 4.873i , \lambda_2 = -.05 - 4873i$, which implies that the point $(.12,1.2)$ is a spiral sink. So in this system both the viral strain and immune response will begin oscillating dramatically and then as time approaches infinity, they will settle to stable values. This is illustrated in figure \ref{fig:hiv1}
 \label{sub:Determining Stability of Fixed points}
 \begin{figure}[h!]
     \centering
@@ -90,6 +90,25 @@ Where $z$ is the cross reactive response that decays at rate $b$.  $v = \sum^{N}
 \subsection{HIV Section}
 
 \subsection{Ebola Section}
+Ebola is known to evade the immune system during infection. We present a mathematical model of a system of non-linear ordinary differential equations derived from known biological dynamics and a few biologically reasonable assumptions.
+
+\subsubsection{Ebola Background}
+\subsubsection{The Herz Model}
+The Herz Model is a deterministic model for viral reproduction, which describes all events using a system of three equations:
+
+	x(t) = number of uninfected cells
+	y(t) = number of infected cells
+	v(t) = number of free virus particles
+
+And a modification, since contact between a virus and a cell reduces the number of available free virus.
+
+\begin{equation}
+	\begin{split}
+	dx/dt = lambda - 
+	\end{split}
+\end{equation}
+
+
 
 \section{Conclusion}
 \label{sub:Conclusion}

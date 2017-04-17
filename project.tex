@@ -7,7 +7,7 @@
 \begin{document}
 \maketitle
 \abstract{
-Here I am changing something i am belle lololol mea quidam pericula appellantur, ne quo vitae recteque. Duo ullum deserunt definitiones ea, ex has vocent constituam inciderint, at novum philosophia has. Summo facete audire eu pro, mazim tritani tibique ne quo. Justo deterruisset reprehendunt qui cu, nam te debet oblique incorrupte. Usu nominavi copiosae patrioque et, nec ferri constituto ei.
+babkabkaka mea quidam pericula appellantur, ne quo vitae recteque. Duo ullum deserunt definitiones ea, ex has vocent constituam inciderint, at novum philosophia has. Summo facete audire eu pro, mazim tritani tibique ne quo. Justo deterruisset reprehendunt qui cu, nam te debet oblique incorrupte. Usu nominavi copiosae patrioque et, nec ferri constituto ei.
 
 }
 \section{Introduction}
@@ -53,11 +53,19 @@ We will now model our system of equations with conditions $r = 2.4, a = 2, b = 0
 
 The fixed point $(0,0)$ coresponds to the eigenvalues $\lambda_1 = 2.4, \lambda_2 = -.1$, which implies that $(0,0)$ is a saddle point. The fixed point $(\alpha,\beta) = (.12,1.2)$ results in eigenvalues $\lambda_1 = -.05 + 4.873i , \lambda_2 = -.05 - 4873i$, which implies that the point $(.12,1.2)$ is a spiral sink. So in this system both the viral strain and immune response will begin oscillating dramatically and then as time approaches infinity, they will settle to stable values. This is illustrated in figure \ref{fig:hiv1}
 \label{sub:Determining Stability of Fixed points}
-\begin{figure}[h!]
+\begin{figure}[!tbp]
     \centering
-    \caption{\textbf{\textit{Population size of the viral load and the immune response for a single virus strain with r = 2.4, a = 2, b = 0.1, c = 1.}}}
-    \includegraphics[scale=.4]{imgs/hiv_graph1.png}
-    \label{fig:hiv1}
+    \begin{minipage}[b]{0.4\textwidth}
+	    \caption{\textbf{\textit{Population sizes for a single virus strain with r = 2.4, a = 2, b = 0.1, c = 1.}}}
+	    \includegraphics[scale=.25]{imgs/hiv_graph1.png}
+	    \label{fig:hiv1}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[b]{0.4\textwidth}
+		\caption{\textbf{\textit{Population sizes for multiple strains  with r = 2.4, a = 2, b=0.1,c=1,q=2.4,k=1.}}}
+		\includegraphics[scale=.25]{imgs/hiv_graph2.png}
+		\label{fig:hiv2}
+	\end{minipage}
 \end{figure}
 
 \subsection{Modeling the System with Multiple Viral Strains}
@@ -80,23 +88,35 @@ Where $z$ is the cross reactive response that decays at rate $b$.  $v = \sum^{N}
 
 
 \subsubsection{Getting Eigenvalues}
-First we take the Jacobian of the system of equations.
+In this case we are going to be introducing a the variable:
+\[
+V = \sum_{i = 1}^N v_i
+\]
+We will assume that $V$ is constant at each iteration. Thus our new system of equations becomes 
+\begin{equation}
+	\begin{split}
+		\dot v &= v(r - ax - qz) \\
+		\dot x &= -bx + cv \\
+		\dot z &= kV - bz
+	\end{split}
+\end{equation}
+First we take the Jacobian of the system of equations. 
 %the jacobian
 \begin{equation}
     J=
     \begin{pmatrix}
         -ax-qz+r    &-va    &-qv    \\
         c           &-b     &0      \\
-        k           &0       &-b
+        0           &0       &-b
     \end{pmatrix}
 \end{equation}
 %the characteristic equation
 Next we find the characteristic equation
 \begin{equation}
     \begin{split}
-        J - \lambda I &= \\ 
-        &-a{b}^{2}x-abcv-2\,ab\lambda\,x-ac\lambda\,v-a{\lambda}^{2}x-{b}^{2}qz -bkqv-2\,b\lambda\,qz-k\lambda\,qv \\
-        &-{\lambda}^{2}qz-{b}^{2}\lambda+{b}^ {2}r-2\,b{\lambda}^{2}+2\,b\lambda\,r-{\lambda}^{3}+{\lambda}^{2}r
+        | J - \lambda I | &= \\ 
+        &-a{b}^{2}x-abcv-2\,ab\lambda\,x-ac\lambda\,v-a{\lambda}^{2}x-{b}^{2}qz \\
+        &-2\,b\lambda\,qz-{\lambda}^{2}qz-{b}^{2}\lambda+{b}^{2}r-2\,b{\lambda}^{2}+2\,b\lambda\,r-{\lambda}^{3}+{\lambda}^{2}r
     \end{split}
 \end{equation}
 
@@ -105,15 +125,15 @@ solving for lambda, we get the eigenvalues
 \begin{equation}
     \begin{split}
         \lambda_1 &=  -b\\
-        \lambda_2 &= -1/2\,ax-1/2\,qz-b/2+r/2 \\ 
-        &+1/2\,\sqrt {{a}^{2}{x}^{2}+2\,axqz+{q}^{2}{z} ^{2}-2\,abx-4\,acv-2\,axr-2\,bqz-4\,kqv-2\,qzr+{b}^{2}+2\,br+{r}^{2}} \\
-        \lambda_3 &= -1/2\,ax-1/2\,qz-b/2+r/2 \\ 
-        &-1/2\,\sqrt {{a}^{2}{x}^{2}+2\,axqz+{q}^{2}{z} ^{2}-2\,abx-4\,acv-2\,axr-2\,bqz-4\,kqv-2\,qzr+{b}^{2}+2\,br+{r}^{2}}
+        \lambda_{2,3} &= -1/2\,ax-1/2\,qz-b/2+r/2 \\
+        &\pm 1/2\,\sqrt {{a}^{2}{x}^{2}+2\,axqz+{q}^{2}{z}^{2}-2\,abx-4\,acv-2\,axr-2\,bqz-2\,qzr+{b}^{2}+2\,br+{r}^{2}}         
     \end{split}
 \end{equation}
 
 
 \subsubsection{Modeling The Equation}
+
+We will be studying the behavior of this equation with the values
 
 \begin{equation}
     \begin{split}
@@ -122,30 +142,22 @@ solving for lambda, we get the eigenvalues
     \label{eq:vals}
 \end{equation}
 
-Evaluating the characteristic equation at the fixed points $\{v = 0,x = 0,z = 0\}$ with the values in \ref{eq:vals} and solving for $\lambda$ we get
-\begin{equation}
-    \lambda_{1,2,3} = 2.4,-.1,-.1
-\end{equation}
+Our first step is to determine the fixed points of the system of equations. In this case there are two.
 
-So we know that the point $(0,0,0)$ is a source. Now we need to find the interesting part of the equation. Setting our system of equations to zero and solving for $x,v\text{ and } z$ we get the fixed point
 %fixed points of equation
 \begin{equation}
-v ={\frac {br}{ac+kq}},x ={ \frac {cr}{ac+kq}},z={\frac {kr}{ac+kq}}
-    \label{eq:fixed}
+	\begin{split}
+		&\text{Fixed point 1: } \quad v=0,x=0,z={\frac {kV}{b}} \\
+		&\text{Fixed point 2: } \quad v=-{\frac {qkV-br}{ac}},x=-{\frac {qkV-br}{ab}},z={\frac {kV}{b}} 
+	\end{split}
+	\label{eq:fixed}
 \end{equation}
 
-Evaluating the characteristic equation at the fixed points in \ref{eq:fixed} with the values in \ref{eq:vals} and solving for $\lambda$ we get
-\begin{equation}
-    \lambda_{1,2,3} = -.1,-.05 \pm .4873i
-\end{equation}
-So the fixed point $\{v = .0\overline{54}, x = .\overline{54}, z =.\overline{54}\}$ is a stable spiral. 
+Our observations show that our first fixed point will act as a source and the second will act as a spiral sink. This is demonstrated in figure \ref{fig:hiv2}
 
-\begin{figure}[h!]
-    \centering
-    \caption{\textbf{\textit{Example of a cross-reactive immune response. The total population sizes of the viral load and the immune response are shown for r = 2.4, a = 2, b=0.1,c=1,q=2.4,k=1 with a random probability for the rise of new virus strains.}}}
-    \includegraphics[scale=.4]{imgs/hiv_graph2.png}
-    \label{fig:hiv2}
-\end{figure}
+
+
+
 
 \subsection{HIV Section}
 

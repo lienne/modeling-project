@@ -19,6 +19,7 @@ Lorem ipsum dolor sit amet, id mea quidam pericula appellantur, ne quo vitae rec
 \label{sec:Main part}
 
 \subsection{Immune System Response to a Single Viral Strain}
+We begin our observation on a system modeled with a single strain of our virus, which will not mutate in any way. This is the most basic of our models. 
 \begin{equation}
     \begin{cases}
         \dot v &= v(r-ax) = f_1(v,x), \\
@@ -26,7 +27,7 @@ Lorem ipsum dolor sit amet, id mea quidam pericula appellantur, ne quo vitae rec
     \end{cases}
 \end{equation}
 
-Here, $v$ is the viral strain. $x$ is the specific immune system response to the strain. $r$ is the rate at which the virus reproduces. $a$ is the rate at which the immune cells destroy the virus. $b$ is the rate at which the immune cells die off. $c$ is rate at which the immune cells reproduce, which is dependent on the number of viruses present, $v$.  
+Here, $v$ is the viral strain, and $x$ is the specific immune system response to the strain. $r$ is the rate at which the virus reproduces. $a$ is the rate at which the immune cells destroy the virus. $b$ is the rate at which the immune cells die off. $c$ is rate at which the immune cells reproduce, which is dependent on the number of viruses present, $v$.  
 \subsubsection{Getting our eigenvalues}
 First we take the Jacobian matrix of our system, which is
 \begin{equation}
@@ -36,7 +37,7 @@ First we take the Jacobian matrix of our system, which is
         c       & -b
     \end{pmatrix}
 \end{equation}
-Then we find the characteristic equations by evaluating the Jacobian at the two fixed points of our system $(0,0)$ and $(\alpha,\beta)$, where $\alpha = \frac{br}{ac} $ and let $\beta = \frac{r}{a} $
+Then we find the characteristic equations by evaluating the Jacobian at the two fixed points of our system $(0,0)$ and $(\alpha,\beta)$, where $\alpha = \frac{br}{ac} $ and $\beta = \frac{r}{a} $
 \begin{equation}
     \begin{split}
         &J(0,0) - \lambda I = \lambda^2 + \lambda(b-r) -br = 0\\
@@ -69,14 +70,14 @@ The fixed point $(0,0)$ corresponds to the eigenvalues $\lambda_1 = 2.4, \lambda
 \end{figure}
 
 \subsection{Modeling the System with Multiple Viral Strains}
-Suppose there are $N$ strains of the virus.  The $i$th strain of the virus $v_i$ and the immunal reaction $x_i$ to it can be modeled by the system of equations
+Suppose there are now $N$ strains of the virus.  The $i$th strain of the virus $v_i$ and the immune system response $x_i$ to it can be modeled by the system of equations
 \begin{equation}
     \begin{cases}
         \dot v_i &= v_i(r - ax_i), \\
         \dot x_i &= -bx_i + cv_i
     \end{cases}
 \end{equation}
-This adds a degree of randomness to our behavior, as new viruses can appear at any point in time. We may begin with only one virus, which can proceed to mutate as it pleases, or we may begin with many strains. Each new viral strain should result in a new immune response. Eventually, a global immune response will take care of all $N$ viral strains regardless of mutation or rate of mutation. This global response can be modeled by the system of equations
+This adds a degree of randomness to our behavior, as new strains of our virus can mutate from the original at any point in time. We may begin with only one virus, which can proceed to mutate as it pleases, or we may begin with many strains. Each new viral strain should result in a new immune response. Eventually, a global immune response will take care of all $N$ viral strains regardless of mutation or rate of mutation. This global response can be modeled by the system of equations
 \begin{equation}
     \begin{cases}
         \dot v_i &= v_i(r - ax_i - qz) \\
@@ -89,7 +90,7 @@ Where $z$ is the cross reactive response that decays at rate $b$.  $v = \sum^{N}
 
 \subsubsection{Getting Eigenvalues}
 \label{sec:hiv2_evals}
-In this case we are going to be introducing a the variable:
+In this case we are going to be introducing a new variable:
 \[
 V = \sum_{i = 1}^N v_i
 \]
@@ -121,7 +122,7 @@ Next we find the characteristic equation
     \end{split}
 \end{equation}
 
-solving for lambda, we get the eigenvalues
+Solving for lambda, we get the eigenvalues
 
 \begin{equation}
     \begin{split}

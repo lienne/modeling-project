@@ -5,17 +5,17 @@
 \title{Mathematical Modeling Project}
 \author{Tyler Lukasiewicz, Liana Severo, Caitlin Buttery}
 \begin{document}
+\tableofcontents
 \maketitle
 \abstract{
-babkabkaka mea quidam pericula appellantur, ne quo vitae recteque. Duo ullum deserunt definitiones ea, ex has vocent constituam inciderint, at novum philosophia has. Summo facete audire eu pro, mazim tritani tibique ne quo. Justo deterruisset reprehendunt qui cu, nam te debet oblique incorrupte. Usu nominavi copiosae patrioque et, nec ferri constituto ei.
-
+This paper endeavors to explore the predator-prey (Lotka-Volterra) system as applied to human viral infections and immune system responses to said viruses. In the first section, the authors explore the mathematics behind a simplified system for generic viruses, working up to the model that can be used to model HIV’s effect in the body. The next section is used to describe specific models for the Ebola virus and explores the mathematics behind it as well.
 }
 \section{Introduction}
 \label{sec:Introduction}
-Lorem ipsum dolor sit amet, id mea quidam pericula appellantur, ne quo vitae recteque. Duo ullum deserunt definitiones ea, ex has vocent constituam inciderint, at novum philosophia has. Summo facete audire eu pro, mazim tritani tibique ne quo. Justo deterruisset reprehendunt qui cu, nam te debet oblique incorrupte. Usu nominavi copiosae patrioque et, nec ferri constituto ei.
+The predator-prey models (also known as the Lotka-Volterra models) of equations are fairly basic models that can be easily manipulated with different variables and different populations. When one thinks of predators and prey, a system that does not generally come to mind is that of the human body fighting off a disease. However, it can be shown that this system of predatory immune cells preying on viruses can be modeled from these equations with varying degrees of complexity. This paper takes a look at a few basic models, and finally reviews two very deadly viruses that can be introduced to this system, where prey overtakes predator: HIV and Ebola.
 
 
-\section{Research and Methods}
+\section{Predator Prey Model as it Relates to Viruses}
 \label{sec:Main part}
 
 \subsection{Immune System Response to a Single Viral Strain}
@@ -48,7 +48,7 @@ Then we find the characteristic equations by evaluating the Jacobian at the two 
         &\gamma =  b - r + a\beta \text{, and } \delta = ac\alpha + ab\beta -rb
     \end{split}
 \end{equation}
-\subsubsection{Modeling the System With One Viral Strain}
+\subsubsection{Modeling the System}
 We will now model our system of equations with conditions $r = 2.4, a = 2, b = 0.1, \text{ and }c = 1.$. We will also assume that we are starting with no viruses and no immune response.
 \label{sub:modeling the sytem}
 
@@ -158,7 +158,7 @@ Our first step is to determine the fixed points of the system of equations. In t
 Our observations show that our first fixed point will act as a source and the second will act as a spiral sink. This is demonstrated in figure \ref{fig:hiv2}
 
 
-\subsection{HIV Section}
+\section{Models Pertaining to HIV}
 
 Now we will shift our focus to HIV specifically. HIV, the precursor to AIDS, destroys the immune system so the body cannot fight back against any illness, viral or otherwise. It kills white blood cells (a specific type known as a CD4 cell) and makes copies of itself within said cell. This will use our same system as before with our multiple viral strains with two differences; this time, a damping term is introduced in our equations for our immune cell production and our global immune response equation, reflecting the destruction of the body’s immune cell production and the slowing of the global immune response, respectively.
 
@@ -188,7 +188,7 @@ Once again we will be introduce the variable $V$ as defined in section \ref{sec:
 	\label{fig:hiv3}
 \end{figure}
 
-\subsubsection{Identifying Eigenvalues}
+\subsection{Identifying Eigenvalues}
 As in previous sections our first step is to find the Jacobian
 \begin{equation}
 J = \left( \begin {array}{ccc} -ax-qz+r&-va&-vq\\ \noalign{\medskip}c&-Vu
@@ -221,7 +221,7 @@ Finally, by solving our characteristic equation for $\lambda$ we can obtain our 
 	\end{split}
 \end{equation}
 
-\subsubsection{Modeling The Equation}
+\subsection{Modeling The Equation}
 We now present a model of the this system of equation with the following values:
 \begin{equation}
 a=2,b= 0.1,c=1,k=1,q= 2.4,r= 2.4,u=1
@@ -241,7 +241,7 @@ This is demonstrated in figure \ref{fig:hiv3}.
 
 
 
-\section{Ebola Section}
+\section{Observations and Methods Concerning Ebola}
 
 Ebola is known to evade the immune system and go undetected during infection. We present a mathematical model done by Thomas Wester from the U.S. Naval Academy, using a system of non-linear ordinary differential equations derived from known biological dynamics and a few biologically reasonable assumptions.
 
@@ -262,22 +262,24 @@ The Herz Model is a deterministic model for viral reproduction, which describes 
 And a modification, since contact between a virus and a cell reduces the number of available free virus.
 
 \begin{equation}
+		\label{eq:bell1}
 		\dot x = \lambda - \mu x - \beta vx\\
 \end{equation}
 \begin{equation}
+\label{eq:bell4}
+\dot v = cy - \gamma v - \beta vx\\
+\end{equation}
+\begin{equation}
+		\label{eq:bell2}
 		\dot y = \beta vx - \alpha y\\
 \end{equation}
 \begin{equation}
-		\dot v' = cy - \gamma v\\
+\label{eq:bell3}
+\dot v' = cy - \gamma v\\
 \end{equation}
-\begin{equation}
-		\dot v = cy - \gamma v - \beta vx\\
-\end{equation}
-
-In equation (13), $\lambda$, $\mu$, and $\beta$ are the supply, death, and virus infection rates of uninfected cells, respectively.
-In equation (14), $\alpha$ is the natural death rate of infected cells.
-In equation (15), c is the rate at which infected cells produce virus, and $\gamma$ is the natural attrition of free virus particles.\\
-
+In equation \ref{eq:bell1}, $\lambda$, $\mu$, and $\beta$ are the supply, death, and virus infection rates of uninfected cells, respectively.
+In equation \ref{eq:bell2}, $\alpha$ is the natural death rate of infected cells.
+In equation \ref{eq:bell3}, c is the rate at which infected cells produce virus, and $\gamma$ is the natural attrition of free virus particles.\\
 
 \subsection{Ebola Application of the Herz Model}
 Wester's model considers four distinct populations which are denoted:\\
@@ -445,7 +447,7 @@ Similar to figure 2, the virus population appears to approach zero several times
 
 \section{Conclusion}
 \label{sub:Conclusion}
-Lorem ipsum dolor sit amet, id mea quidam pericula appellantur, ne quo vitae recteque. Duo ullum deserunt definitiones ea, ex has vocent constituam inciderint, at novum philosophia has. Summo facete audire eu pro, mazim tritani tibique ne quo. Justo deterruisset reprehendunt qui cu, nam te debet oblique incorrupte. Usu nominavi copiosae patrioque et, nec ferri constituto ei.
+The Lotka-Volterra models of equations are fairly basic models that can be easily manipulated with different variables and different populations, one of which being that of a human body fighting off a viral infection. This paper examined a few basic models, and finally our much deadlier models for HIV and Ebola.uto ei.
 
 
 
@@ -456,10 +458,23 @@ Michel Goossens, Frank Mittelbach, and Alexander Samarin.
 Addison-Wesley, Reading, Massachusetts, 1993.
 
 \bibitem{ebola1}
-Wester Thomas (2015).
-Analysis and Simulation of a Mathematical Model of Ebola Virus Dynamics in vivo. 
-\textit{Department of Mathematics, U.S. Naval Academy.}
+Wester Thomas (2015).Analysis and Simulation of a Mathematical Model of Ebola Virus Dynamics in vivo. \textit{Department of Mathematics, U.S. Naval Academy.}
+\bibitem{nolte}
+Nolte, D. (2015).Introduction to Modern Dynamics: Chaos, Networks, Space and Time.\textit{Oxford New York, NY: Oxford University Press.}
+\bibitem{SMAIF}
+SMAIF, (2016, July 14th) What is HIV/AIDS? \textit{Retrieved from www.aids.gov}
+\bibitem{HIV_Virons}
+Chacko, Matthew (2013), "A Mathematical Model Describing the Dynamics of HIV Virions and CD4+T Cells in the Human Immune System".\textit{ Honors Theses.} Paper 73.
+\bibitem{strogatz}
+Strogatz, S. (2000). Nonlinear Dynamics and Chaos: With Applications to Physics, Biology, Chemistry, and Engineering. Cambridge, \textit{MA: Westview Press.}
+\bibitem{Banton}
+Banton, S., Roth, Z., and Pavlovic, M. (2010) Mathematical Modeling of Ebola Virus Dynamics as a Step towards Rational Vaccine Design. \textit{26th Southern Biomedical Engineering Conference.}
 \end{thebibliography}
+
+
+
+
+
 
 
 \end{document}
